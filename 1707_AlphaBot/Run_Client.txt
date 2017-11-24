@@ -1,0 +1,6 @@
+cd /home/pi/Python/PythonPerso/1707_AlphaBot
+echo "> python3 Main_Client.py"
+python3 Main_Client.py
+echo "> "
+echo "-- Press key to exit --"
+read -n 1 -s
