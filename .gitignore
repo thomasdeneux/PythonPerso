@@ -1,0 +1,11 @@
+*.pyc
+
+.idea/
+__pycache__
+
+mouseeyetracking.avi
+
+1502_DualCamera_OpticalImaging/python/dualcamera v1.0 - source code.zip
+1502_DualCamera_OpticalImaging/python/dualcamera_v1.0 - win32.zip
+1502_DualCamera_OpticalImaging/python/registration.csv.hid
+1409_SecureBox/python/build/

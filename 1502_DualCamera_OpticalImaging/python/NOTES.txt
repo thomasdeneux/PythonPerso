@@ -1,0 +1,12 @@
+
+The Python code for the dualcamera project entails 4 files:
+- dualcamera.py is the main code
+- BLK.py contains code to read/save BLK files
+- package.py contains code to build a standalone program, using the cx_freeze Python module
+- keyboard.png is an image displayed by the program
+
+I worked with the 'anaconda' distribution of Python, the only additional module that i had to install was 'cx_freeze'.
+(in other words, it is sufficient to install the anaconda distribution + cx_freeze module to be able to create again the standalone program from the source code)
+
+Thomas Deneux
+18/02/2015

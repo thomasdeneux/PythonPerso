@@ -1,0 +1,49 @@
+
+************************* INSTALLED PROGRAMS ***********************************
+
+SOURCETREE
+shared project on Bitbucket Securebox/Securebox
+
+ANACONDA
+http://continuum.io/downloads (windows installer: check 'add to path' and 'create registry entries')
+
+This sets up python together with many packages including:
+- Spyder, the programming environment
+  (to work with the project SecureBox in Spyder, select 'Files > New Project':
+  Spyder asks which folder to use as 'spyder workspace' -> choose the folder
+  inside which SecureBox folder is sitting)
+- pyCrypto (https://www.dlitz.net/software/pycrypto) for the cryptographic functions
+
+additional packages needed: (run .exe files, winpython package install from the control panel doesn't really seem to work)
+- cx_Freeze https://pypi.python.org/pypi?:action=display&name=cx_Freeze&version=4.3.3
+
+correct installation of python and Spyder can be tested by trying to execute helloworld.py
+correct installation of cx_Freeze can be tested by trying to compile helloworld.py by executing helloworld_setup.py
+correct installation of pyCrypto can be tested by trying to execute crypto.py
+
+INNO SETUP
+(use compiler to edit and execute securebox_installer.iss file)
+
+
+
+************************* DOCUMENTATION ****************************************
+
+Python
+C:\Users\THomas\Anaconda\Doc\python278.chm
+
+PyQt4
+http://fr.wikibooks.org/wiki/PyQt/Premier_exemple_:_Hello_World_!
+http://pyqt.sourceforge.net/Docs/PyQt4/index.html
+http://qt-project.org/doc/
+
+PyCrypto
+https://www.dlitz.net/software/pycrypto/api/current/
+
+cx_Freeze
+http://cx-freeze.readthedocs.org/en/latest/index.html
+
+
+************************* COMPILATION *****************************************
+
+run 'python package.py' (this creates python/build/exe.win32-2.7/*)
+then compile securebox_installer.iss in Inno Setup (this creates Output/Secure Box vx.x.x setup.exe)
