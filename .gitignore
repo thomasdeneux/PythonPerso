@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.pyc
 
 .idea/
@@ -9,3 +10,6 @@ mouseeyetracking.avi
 1502_DualCamera_OpticalImaging/python/dualcamera_v1.0 - win32.zip
 1502_DualCamera_OpticalImaging/python/registration.csv.hid
 1409_SecureBox/python/build/
+=======
+.idea/
+>>>>>>> 15db73df4f67fd1c27c182ffa1b6426bf11b5ac2
