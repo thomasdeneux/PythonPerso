@@ -1,4 +1,12 @@
-import numpy as np
+import gym
+import time
+
+env = gym.make('MountainCar-v0')
+env.reset()
+for _ in range(1000):
+    time.sleep(.1)
+    env.render()
+    env.step(env.action_space.sample()) # take a random action
 
 
 
