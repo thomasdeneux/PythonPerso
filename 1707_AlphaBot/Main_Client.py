@@ -1,28 +1,27 @@
 
 import time
-import Communication, Alphabot
+import Communication, AlphaBot
 from Utils import *
 
-
 # Robot object
-Ab = Alphabot.AlphaBot()
+Ab = AlphaBot.AlphaBot()kkkk
 
 # Open communication channel
-channel = Communication.ClientServerChannel('client')
+channel = Communication.ClientServerChannel('client', interrupt_action=Ab.stop)
 
 # Main loop
 try:
-    target_period = 0.1  # target loop frequency: 10Hz
+    target_period = 0.25  # target loop frequency: 10Hz
     last_tick = time.time()
     while not channel.is_closed():
         # Pause to match target frequency
-        rem = last_tick + target_period - time.time()
-        last_tick = time.time()
-        if rem > 0:
-            time.sleep(rem)
+        step_duration = time.time() - last_tick
+        if step_duration < target_period:
+            print('step duration (s):', step_duration, '-> sleeping')
+            time.sleep(target_period-step_duration)
         else:
-            print('Loop iteration took longer time than one target period, '
-                  'consider increasing target_period')
+            print('step duration (s):', step_duration)
+        last_tick = time.time()
 
         # Sensor input
         data = Ab.get_sensor_data()

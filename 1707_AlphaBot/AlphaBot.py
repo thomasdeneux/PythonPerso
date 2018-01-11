@@ -6,8 +6,8 @@ import numpy as np
 from math import floor
 from collections import deque
 
-_speed_buffer_size = 8
-_speed_integrate_time = .5
+_speed_buffer_size = 5
+_speed_integrate_time = .4
 
 
 # noinspection PyPep8Naming
@@ -172,11 +172,11 @@ class AlphaBot:
         return self.get_speed() > 0
 
     # Motor methods
-    def forward(self):
-        GPIO.output(self.IN1, GPIO.HIGH)
-        GPIO.output(self.IN2, GPIO.LOW)
-        GPIO.output(self.IN3, GPIO.LOW)
-        GPIO.output(self.IN4, GPIO.HIGH)
+    # def forward(self):
+    #     GPIO.output(self.IN1, GPIO.HIGH)
+    #     GPIO.output(self.IN2, GPIO.LOW)
+    #     GPIO.output(self.IN3, GPIO.LOW)
+    #     GPIO.output(self.IN4, GPIO.HIGH)
 
     def stop(self):
         GPIO.output(self.IN1, GPIO.LOW)
@@ -184,29 +184,29 @@ class AlphaBot:
         GPIO.output(self.IN3, GPIO.LOW)
         GPIO.output(self.IN4, GPIO.LOW)
 
-    def backward(self):
-        GPIO.output(self.IN1, GPIO.LOW)
-        GPIO.output(self.IN2, GPIO.HIGH)
-        GPIO.output(self.IN3, GPIO.HIGH)
-        GPIO.output(self.IN4, GPIO.LOW)
-
-    def left(self):
-        GPIO.output(self.IN1, GPIO.LOW)
-        GPIO.output(self.IN2, GPIO.LOW)
-        GPIO.output(self.IN3, GPIO.LOW)
-        GPIO.output(self.IN4, GPIO.HIGH)
-
-    def right(self):
-        GPIO.output(self.IN1, GPIO.HIGH)
-        GPIO.output(self.IN2, GPIO.LOW)
-        GPIO.output(self.IN3, GPIO.LOW)
-        GPIO.output(self.IN4, GPIO.LOW)
-
-    def setPWMA(self, value):
-        self.PWMA.ChangeDutyCycle(value)
-
-    def setPWMB(self, value):
-        self.PWMB.ChangeDutyCycle(value)
+    # def backward(self):
+    #     GPIO.output(self.IN1, GPIO.LOW)
+    #     GPIO.output(self.IN2, GPIO.HIGH)
+    #     GPIO.output(self.IN3, GPIO.HIGH)
+    #     GPIO.output(self.IN4, GPIO.LOW)
+    #
+    # def left(self):
+    #     GPIO.output(self.IN1, GPIO.LOW)
+    #     GPIO.output(self.IN2, GPIO.LOW)
+    #     GPIO.output(self.IN3, GPIO.LOW)
+    #     GPIO.output(self.IN4, GPIO.HIGH)
+    #
+    # def right(self):
+    #     GPIO.output(self.IN1, GPIO.HIGH)
+    #     GPIO.output(self.IN2, GPIO.LOW)
+    #     GPIO.output(self.IN3, GPIO.LOW)
+    #     GPIO.output(self.IN4, GPIO.LOW)
+    #
+    # def setPWMA(self, value):
+    #     self.PWMA.ChangeDutyCycle(value)
+    #
+    # def setPWMB(self, value):
+    #     self.PWMB.ChangeDutyCycle(value)
 
     def set_motor(self, left, right):
         # Set left motor (beware, forward left wheel motion makes the robot
@@ -221,12 +221,12 @@ class AlphaBot:
             self.PWMA.ChangeDutyCycle(0 - left)
         # Set right motor (and vice-versa...)
         if (right >= 0) and (right <= 100):
-            GPIO.output(self.IN3, GPIO.HIGH)
-            GPIO.output(self.IN4, GPIO.LOW)
+            GPIO.output(self.IN4, GPIO.HIGH)
+            GPIO.output(self.IN3, GPIO.LOW)
             self.PWMB.ChangeDutyCycle(right)
         elif (right < 0) and (right >= -100):
-            GPIO.output(self.IN3, GPIO.LOW)
-            GPIO.output(self.IN4, GPIO.HIGH)
+            GPIO.output(self.IN4, GPIO.LOW)
+            GPIO.output(self.IN3, GPIO.HIGH)
             self.PWMB.ChangeDutyCycle(0 - right)
 
 

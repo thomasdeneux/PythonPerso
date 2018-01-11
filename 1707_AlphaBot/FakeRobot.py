@@ -1,9 +1,10 @@
 import random
 import time
+import numpy as np
 
 import Communication
 
-_target_period = 0.02  # data is sent at 50Hz
+_target_period = 0.01  # data is sent at 100Hz
 
 
 # noinspection PyMethodMayBeStatic
@@ -11,6 +12,7 @@ class ClientServerChannel:
 
     def __init__(self):
         self.last_tick = time.time()
+        self.current_motor = [0, 0]
 
     def read_sensor(self):
         # Wait for next 'available data'
@@ -23,9 +25,11 @@ class ClientServerChannel:
         data.IR_left = random.uniform(0., 1000.)
         data.IR_right = random.uniform(0., 1000.)
         data.IR_line = [random.uniform(0., 1000.) for i in range(5)]
+        data.speed = np.maximum(np.array(self.current_motor)-10, 0).tolist()
         return name, data
 
     def send_motor(self, name, data):
+        self.current_motor = data
         pass
 
     def is_closed(self):

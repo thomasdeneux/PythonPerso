@@ -10,6 +10,10 @@ mouseeyetracking.avi
 1502_DualCamera_OpticalImaging/python/registration.csv.hid
 
 1409_SecureBox/python/build/
+
 1707_AlphaBot/project.lnk
+1707_AlphaBot/tests/test_learn_breakout_a2c_cnn_1e6
+1707_AlphaBot/tests/test_learn_breakout_a2c_cnn_1e7
+
 github_icon.ico
 desktop.ini
