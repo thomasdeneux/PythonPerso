@@ -125,7 +125,7 @@ class AlphaHub:
 
 class AlphaEnv(Env):
 
-    def __init__(self, channel, max_speed=50, nstack=3, nstep=1, motion_threshold=5, do_gui=True, episode_length=20,
+    def __init__(self, channel, max_speed=50, nstack=3, nstep=1, max_motion=60, do_gui=True, episode_length=20,
                  action_space='discrete'):
         # Connect to AlphaBot
         self.hub = AlphaHub(channel, max_speed=max_speed, do_gui=False)
@@ -146,13 +146,12 @@ class AlphaEnv(Env):
         # Output
         self.action_names = ['forward',  #'backward',
                              'left_backward', #'left_forward', 'left',
-                             'right_backward'] #, 'right_forward', 'right', ]
+                             ]  #'right_backward_slow'] #, 'right_backward'] #, 'right_forward', 'right', ]
         self.naction = len(self.action_names)
         self.action_space = spaces.Discrete(self.naction)
 
         # Reward
-        self.max_motion = 60 # Will be used to rescale reward between 0 and 1
-        self.motion_threshold = motion_threshold  # This threshold for detecting if there is motion is manually adjusted
+        self.max_motion = max_motion  # Will be used to rescale reward between 0 and 1
         self.reward_range = (-1, 1)
 
         # Number of data collections per new motor command
@@ -191,12 +190,16 @@ class AlphaEnv(Env):
             motor = [-max_speed, max_speed]
         elif action_name == 'left_backward':
             motor = [-max_speed, 0]
+        elif action_name == 'left_backward_slow':
+            motor = [-max_speed*0.7, 0]
         elif action_name=='right_forward':
             motor = [max_speed, 0]
         elif action_name=='right':
             motor = [max_speed, -max_speed]
         elif action_name=='right_backward':
             motor = [0, -max_speed]
+        elif action_name=='right_backward_slow':
+            motor = [0, -max_speed*0.7]
         else:
             raise Exception('unknown action:', action_name)
 
@@ -337,7 +340,7 @@ def AI_deepq(channel: Communication.ClientServerChannel):
     # hub.cleanup()
 
 
-    env = AlphaEnv(channel, motion_threshold=5, do_gui=True, max_speed=40)
+    env = AlphaEnv(channel, max_motion=22, do_gui=True, max_speed=40)
     # while True:
     #     action = env.action_space.sample()
     #     env.step(action)
@@ -359,7 +362,7 @@ def AI_deepq(channel: Communication.ClientServerChannel):
 
 def AI_classic(channel: Communication.ClientServerChannel):
 
-    # env = AlphaEnv(channel, motion_threshold=5, do_gui=True, max_speed=30)
+    # env = AlphaEnv(channel, max_motion=60, do_gui=True, max_speed=30)
     #
     # action = 'forward'
     # while True:
